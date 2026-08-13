@@ -4,14 +4,18 @@ Static, no-build landing page for the Netresearch Agent Engineering System —
 how real agent sessions become durable, verifiable, distributable engineering
 knowledge (retro → skills → checkpoints → harness → distribution).
 
-**Live:** https://netresearch.github.io/agent-engineering/
+**Live:** https://netresearch.github.io/agent-engineering/ (German) ·
+https://netresearch.github.io/agent-engineering/en/ (English)
 
 ## Files
 
-- `public/index.html` — complete page, styles, search, theme switching,
-  JSON-LD, local Chrome `LanguageModel` Q&A and deterministic search fallback
-- `public/og-image.png` — social preview, rendered from
-  `scripts/og-template.html` (`npm run og`)
+- `public/index.html` — complete German page, styles, search, theme
+  switching, JSON-LD, local Chrome `LanguageModel` Q&A and deterministic
+  search fallback
+- `public/en/index.html` — English version, same structure; keep content in
+  sync with the German page
+- `public/og-image.png`, `public/og-image-en.png` — social previews, rendered
+  from `scripts/og-template*.html` (`npm run og`)
 - `public/robots.txt`, `public/sitemap.xml`
 - `public/llms.txt` — compact machine-readable knowledge summary
 

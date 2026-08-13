@@ -8,12 +8,17 @@ Live: https://netresearch.github.io/agent-engineering/
 
 ## Project Structure
 
-- `public/index.html` — the complete page: styles, search, theme switching,
-  JSON-LD, local Chrome `LanguageModel` Q&A with deterministic search fallback.
-  No build step; edit it directly.
-- `public/og-image.png` — committed social preview, rendered from
-  `scripts/og-template.html` via `node scripts/render-og.mjs`. Never edit the
-  PNG directly; edit the template and re-render.
+- `public/index.html` — the complete German page: styles, search, theme
+  switching, JSON-LD, local Chrome `LanguageModel` Q&A with deterministic
+  search fallback. No build step; edit it directly.
+- `public/en/index.html` — the English version, same structure. **Content
+  changes must land in both languages in the same commit**; `verify_site.py`
+  pins per-page canonical/og-image/lang and the shared section anchors, but it
+  cannot see missing prose — keep the translation in sync yourself.
+- `public/og-image.png` / `public/og-image-en.png` — committed social
+  previews, rendered from `scripts/og-template.html` /
+  `scripts/og-template-en.html` via `node scripts/render-og.mjs`. Never edit
+  the PNGs directly; edit the template and re-render.
 - `public/llms.txt`, `public/robots.txt`, `public/sitemap.xml` — machine-facing
   contract; `scripts/verify_site.py` cross-checks them against the page.
 - `.github/workflows/pages.yml` publishes `public/` through GitHub Pages.

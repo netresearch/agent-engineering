@@ -3,6 +3,7 @@
 > Reale Agentenarbeit wird bei Netresearch in dauerhaftes, prüfbares und verteilbares Engineering-Wissen überführt. Skills sind eine mögliche Ausgabe dieses Systems, nicht das System selbst.
 
 Canonical page: https://netresearch.github.io/agent-engineering/
+English version: https://netresearch.github.io/agent-engineering/en/
 Organization: Netresearch DTT GmbH
 Primary language: German
 Last reviewed: 2026-08-13
