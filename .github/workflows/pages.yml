@@ -1,0 +1,56 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # The page is static, committed HTML under public/ — there is no render step.
+  # The build half only runs the gates: verify_site.py decides everything that
+  # is decidable from markup alone; axe needs a real browser and resolved CSS,
+  # which is exactly the class of defect verify_site.py cannot see.
+  #
+  # `include-hidden-files: true` is set on BOTH halves on purpose. Setting it
+  # on the build half alone is a no-op end to end: pages-deploy.yml re-packages
+  # the downloaded directory with actions/upload-pages-artifact, which tars
+  # with `--exclude=.[^/]*` unless its own input is true — so `public/.nojekyll`
+  # would reach the artifact and then be stripped again during Pages packaging.
+  build:
+    uses: netresearch/.github/.github/workflows/pages-build.yml@main
+    permissions:
+      contents: read
+    with:
+      artifact-name: github-pages-site
+      artifact-path: public
+      include-hidden-files: true
+      # The build consumes neither PAGES_BASE_PATH nor PAGES_ORIGIN, so the
+      # extra configure-pages call is not needed here. The deploy half still
+      # runs configure-pages before deploying.
+      configure-pages: false
+      setup-node: true
+      node-version: '22'
+      build-command: >-
+        python3 scripts/verify_site.py
+        && npm ci --ignore-scripts
+        && ./node_modules/.bin/puppeteer browsers install chrome
+        && node scripts/axe-audit.mjs public
+
+  deploy:
+    needs: build
+    uses: netresearch/.github/.github/workflows/pages-deploy.yml@main
+    permissions:
+      pages: write
+      id-token: write
+      contents: read
+    with:
+      artifact-name: github-pages-site
+      artifact-path: ./public
+      include-hidden-files: true

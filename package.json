@@ -1,0 +1,15 @@
+{
+  "name": "agent-engineering",
+  "private": true,
+  "type": "module",
+  "description": "Node lives here for two reasons: the accessibility gate (axe-core needs a real browser and resolved CSS) and the og-image renderer. The page itself is static, committed HTML with no JavaScript dependencies.",
+  "scripts": {
+    "axe": "node scripts/axe-audit.mjs public",
+    "og": "node scripts/render-og.mjs",
+    "verify": "python3 scripts/verify_site.py"
+  },
+  "devDependencies": {
+    "axe-core": "^4.13.0",
+    "puppeteer": "^25.5.0"
+  }
+}
