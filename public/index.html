@@ -758,6 +758,8 @@
     .message.user { justify-self: end; background: var(--nr-primary); color: #fff; border-bottom-right-radius: 5px; }
     .message.assistant { justify-self: start; background: var(--nr-bg); border: 1px solid var(--nr-line); color: var(--nr-text); border-bottom-left-radius: 5px; }
     .message.system { justify-self: stretch; max-width: none; text-align: center; padding: 8px 12px; font-size: 12px; color: var(--nr-text-muted); background: transparent; }
+    .message .cite-chip { display: inline-block; margin: 2px 4px 0 0; padding: 1px 10px; border: 1px solid var(--nr-line); border-radius: 999px; background: var(--nr-surface); color: var(--nr-primary); font-size: 12px; font-weight: 600; text-decoration: none; }
+    .message .cite-chip:hover, .message .cite-chip:focus-visible { border-color: var(--nr-primary); }
     .qa-form { border-top: 1px solid var(--nr-line); padding-top: 16px; }
     .qa-form-row { display: grid; grid-template-columns: 1fr auto; gap: 9px; }
     .qa-submit { min-width: 98px; border: 0; border-radius: 10px; background: var(--nr-primary); color: #fff; font-family: var(--nr-font-headline); font-weight: 700; cursor: pointer; padding: 0 16px; }
@@ -1471,19 +1473,51 @@
       return node;
     }
 
+    // The system prompt asks the model to cite section anchors like [#retro];
+    // models also emit variants such as [/#retro]. Rendered raw they read as
+    // debris, so every marker that names a real section becomes a link chip
+    // carrying the section title. Unknown anchors stay as written.
+    const CITE_MARKER = /\[\s*\/?\s*#([a-z][\w-]*)\s*\]/gi;
+
+    function sectionTitleFor(id) {
+      const section = document.getElementById(id);
+      if (!section || !section.hasAttribute('data-ai-source')) return null;
+      return section.dataset.searchTitle || section.querySelector('h2,h1')?.textContent?.trim() || id;
+    }
+
+    function renderAnswer(node, text) {
+      node.textContent = '';
+      let last = 0;
+      for (const match of text.matchAll(CITE_MARKER)) {
+        const id = match[1].toLowerCase();
+        const title = sectionTitleFor(id);
+        if (title === null) continue;
+        node.append(text.slice(last, match.index));
+        const chip = document.createElement('a');
+        chip.className = 'cite-chip';
+        chip.href = `#${id}`;
+        chip.textContent = title;
+        chip.addEventListener('click', () => closeDialog(qaDialog));
+        node.append(chip);
+        last = match.index + match[0].length;
+      }
+      node.append(text.slice(last));
+      if (chatLog) chatLog.scrollTop = chatLog.scrollHeight;
+    }
+
     function fallbackAnswer(question) {
       const hits = searchSections(question, 3);
       if (!hits.length) return 'Dazu enthält diese Seite keine Information.';
       const tokens = tokensFor(question);
       return 'Diese Abschnitte der Seite sind dafür am relevantesten:\n\n' + hits.map(({section}) =>
-        `[#${section.id}] ${section.title}\n${snippetFor(section.text, tokens, 300)}`
+        `[#${section.id}]\n${snippetFor(section.text, tokens, 300)}`
       ).join('\n\n');
     }
 
     async function answerWithLocalModel(question, messageNode) {
       const session = await ensureSession();
       if (!session || typeof session.promptStreaming !== 'function') {
-        messageNode.textContent = fallbackAnswer(question);
+        renderAnswer(messageNode, fallbackAnswer(question));
         return;
       }
       try {
@@ -1495,9 +1529,13 @@
           messageNode.textContent = answer;
           if (chatLog) chatLog.scrollTop = chatLog.scrollHeight;
         }
-        if (!answer.trim()) messageNode.textContent = 'Dazu enthält diese Seite keine Information.';
+        if (answer.trim()) {
+          renderAnswer(messageNode, answer);
+        } else {
+          messageNode.textContent = 'Dazu enthält diese Seite keine Information.';
+        }
       } catch {
-        messageNode.textContent = fallbackAnswer(question);
+        renderAnswer(messageNode, fallbackAnswer(question));
       }
     }
 
@@ -1510,7 +1548,7 @@
       if (qaInput) qaInput.value = '';
       try {
         if (aiAvailability === 'unavailable') {
-          response.textContent = fallbackAnswer(value);
+          renderAnswer(response, fallbackAnswer(value));
         } else {
           await answerWithLocalModel(value, response);
         }
