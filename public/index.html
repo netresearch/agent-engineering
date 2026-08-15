@@ -56,12 +56,12 @@
         "@id": "https://netresearch.github.io/agent-engineering/#article",
         "headline": "Netresearch Agent Engineering System",
         "alternativeHeadline": "Vom realen Problem zur dauerhaft geprüften Lösung",
-        "description": "Ein technisches System, das Reibung und Learnings aus Agenten-Sessions in die passende dauerhafte Form überführt: Skill, Checkpoint, Projektregel, Harness-Artefakt oder persönliche Regel.",
+        "description": "Ein technisches System, das Reibung und Learnings aus Agenten-Sessions in die passende dauerhafte Form überführt: Skill, Checkpoint, Projektregel, Harness-Artefakt, Upstream-Patch an die kanonische Quelle oder persönliche Regel.",
         "url": "https://netresearch.github.io/agent-engineering/",
         "mainEntityOfPage": "https://netresearch.github.io/agent-engineering/",
         "author": {"@id": "https://www.netresearch.de/#organization"},
         "publisher": {"@id": "https://www.netresearch.de/#organization"},
-        "dateModified": "2026-08-13",
+        "dateModified": "2026-08-15",
         "inLanguage": "de",
         "about": [
           {"@type": "Thing", "name": "AI Agent Skills"},
@@ -98,7 +98,7 @@
           {
             "@type": "Question",
             "name": "Wie wird verhindert, dass Skills zu großen Wissenssammlungen werden?",
-            "acceptedAnswer": {"@type": "Answer", "text": "Skill-Inhalt muss seinen Kontextpreis verdienen. Bevorzugt werden organisationsspezifisches Wissen, reale Failure Patterns, volatile Fakten die Modelle zuverlässig falsch haben, ausführbare Validatoren, Inference-Suppression und Anti-Rationalization-Guards. Fakten und Trigger haben einen kanonischen Owner – oft außerhalb des Agent-Systems; Details werden on demand referenziert."}
+            "acceptedAnswer": {"@type": "Answer", "text": "Skill-Inhalt muss seinen Kontextpreis verdienen. Bevorzugt werden organisationsspezifisches Wissen, reale Failure Patterns, volatile Fakten, die Modelle zuverlässig falsch haben, ausführbare Validatoren, Inference-Suppression und Anti-Rationalization-Guards. Fakten und Trigger haben einen kanonischen Owner – oft außerhalb des Agent-Systems; Details werden on demand referenziert."}
           },
           {
             "@type": "Question",
@@ -108,7 +108,7 @@
           {
             "@type": "Question",
             "name": "Wie werden Agentenregeln technisch durchgesetzt?",
-            "acceptedAnswer": {"@type": "Answer", "text": "Wenn eine Regel enforceable ist, wird sie nicht nur als Prosa konserviert. Je nach Fall wird sie als Checkpoint, Pre-Commit-Hook, CI-Check, Linterregel, Branch Protection oder anderes Harness-Artefakt materialisiert. Das Prinzip lautet: Authority zuerst – wem gehört diese Wahrheit? –, danach Enforceability, dann Reichweite."}
+            "acceptedAnswer": {"@type": "Answer", "text": "Wenn eine Regel enforceable ist, wird sie nicht nur als Prosa konserviert. Je nach Fall wird sie als Checkpoint, Pre-Commit-Hook, CI-Check, Linterregel, Branch Protection oder anderes Harness-Artefakt materialisiert. Das Prinzip lautet: Authority zuerst – wem gehört diese Wahrheit? –, danach Enforceability, dann Reach."}
           },
           {
             "@type": "Question",
@@ -814,6 +814,9 @@
       .map-arrow { height: 36px; }
       .map-arrow::before { content: "↓"; }
       .loop-row { grid-template-columns: repeat(2,1fr); }
+      .loop-row .map-card:last-child { grid-column: 1 / -1; }
+      .principle { grid-template-columns: 1fr; }
+      .principle-arrow { transform: rotate(90deg); justify-self: center; }
       .destination-grid, .grid-3, .source-links { grid-template-columns: repeat(2,1fr); }
       .assessment-flow { grid-template-columns: repeat(2,1fr); }
       .assessment-step:last-child { grid-column: 1 / -1; }
@@ -832,8 +835,6 @@
       .hero { padding-top: 54px; }
       .hero-proof, .grid-2, .grid-3, .destination-grid, .loop-row, .maturity, .source-links { grid-template-columns: 1fr; }
       .section { padding: 68px 0; }
-      .principle { grid-template-columns: 1fr; }
-      .principle-arrow { transform: rotate(90deg); justify-self: center; }
       .source-row { grid-template-columns: 1fr; gap: 8px; }
       .assessment-flow { grid-template-columns: 1fr; }
       .assessment-step:last-child { grid-column: auto; }
@@ -923,10 +924,10 @@
           <div class="map-arrow" aria-hidden="true"></div>
           <article class="map-card"><span class="num">2</span><h3>Friction & Learning</h3><p>Fehler, unnötige Schleifen, gute neue Muster oder fehlende Regeln werden als Lernsignal sichtbar.</p></article>
           <div class="map-arrow" aria-hidden="true"></div>
-          <article class="map-card"><span class="num">3</span><h3>Retro klassifiziert</h3><p>Nicht jedes Learning gehört in einen Skill. Bestimmt werden Authority, Enforceability und Reichweite – in dieser Reihenfolge.</p></article>
+          <article class="map-card"><span class="num">3</span><h3>Retro klassifiziert</h3><p>Nicht jedes Learning gehört in einen Skill. Bestimmt werden Authority, Enforceability und Reach – in dieser Reihenfolge.</p></article>
         </div>
         <div class="loop-row">
-          <article class="map-card"><h3>Materialisieren</h3><p>Skill, Checkpoint, Projektregel, Harness-Artefakt oder persönliche Regel.</p></article>
+          <article class="map-card"><h3>Materialisieren</h3><p>Skill, Checkpoint, Projektregel, Harness-Artefakt, Upstream-Patch oder persönliche Regel.</p></article>
           <article class="map-card"><h3>Verifizieren</h3><p>Validatoren, Evals, Assessment, CI, Hooks und Review machen Wirkung sichtbar.</p></article>
           <article class="map-card"><h3>Reconcile & Prune</h3><p>Sobald ein Fakt bei seinem kanonischen Owner angekommen ist, schrumpft die lokale Kopie zum Verweis. Ein System, das nur hinzufügen kann, wird schlechter.</p></article>
           <article class="map-card"><h3>Versionieren & verteilen</h3><p>Skills und Regeln werden als Engineering-Abhängigkeiten reproduzierbar verfügbar.</p></article>
@@ -960,7 +961,7 @@
           <div><strong>3. Reach</strong><p>Erst danach wird entschieden, ob das Learning persönlich, projektlokal oder organisationsweit wiederverwendbar ist.</p></div>
         </div>
 
-        <div class="answer-box"><strong>Paired materialization:</strong> Wenn eine Regel im aktuellen Repository technisch enforceable ist und dasselbe Gate in Schwesterprojekten gebraucht wird, kann ein Learning zweigleisig materialisiert werden: das konkrete Gate im Projekt plus eine Skill-Änderung mit dem Installationsrezept für weitere Projekte. Eine zweite Paar-Form arbeitet upstream: der Patch an den kanonischen Owner plus der Skill-Cleanup, der die lokale Kopie auf einen Verweis reduziert, sobald der Patch angenommen ist.</div>
+        <div class="answer-box"><strong>Paired materialization:</strong> Wenn eine Regel im aktuellen Repository technisch enforceable ist und dasselbe Gate in Schwesterprojekten gebraucht wird, kann ein Learning zweigleisig materialisiert werden: das konkrete Gate im Projekt plus eine Skill-Änderung mit dem Installationsrezept für weitere Projekte. Dieselbe Paarung setzt auch upstream an: der Patch an den kanonischen Owner plus der Skill-Cleanup, der die lokale Kopie auf einen Verweis reduziert, sobald der Patch angenommen ist.</div>
       </div>
     </section>
 
@@ -1090,9 +1091,9 @@
           &nbsp;&nbsp;↓<br>
           Retro erkennt Friction + Learning<br>
           &nbsp;&nbsp;↓<br>
-          klassifiziert nach <span class="orange">Enforceability</span> und Reichweite<br>
+          klassifiziert nach <span class="orange">Authority</span>, Enforceability und Reach<br>
           &nbsp;&nbsp;↓<br>
-          Skill / Checkpoint / Harness / Projektregel<br>
+          Skill / Checkpoint / Harness / Projektregel / Upstream-Patch<br>
           &nbsp;&nbsp;↓<br>
           Eval + Assessment + CI/Hook<br>
           &nbsp;&nbsp;↓<br>
@@ -1127,9 +1128,9 @@
           <details><summary>Wie entstehen neue Skills?</summary><p>Nicht aus vermuteten Themenlisten, sondern retrospektiv aus realen Problemen, wiederkehrender Reibung und wiederverwendbaren Learnings. Ein neuer Skill ist nur eine mögliche Zielart; Fakten mit fremdem Owner gehen upstream an ihre kanonische Quelle, mechanisch prüfbare Regeln werden bevorzugt als Checkpoint oder Enforcement materialisiert.</p></details>
           <details><summary>Welche Rolle spielt AGENTS.md?</summary><p><code>AGENTS.md</code> ist ein kompakter Index zur autoritativen Projektwahrheit. Architektur, Commands, Dependencies und Details bleiben in den tatsächlichen Quellen wie <code>docs/</code>, <code>composer.json</code>, Makefile, DDEV-Konfiguration und Scripts. Der Harness prüft, dass Referenzen und dokumentierte Commands stimmen.</p></details>
           <details><summary>Was ist der Unterschied zwischen einem Skill und einem Checkpoint?</summary><p>Ein Skill trägt Workflow, Entscheidungen, Failure Patterns und nicht-mechanische Anleitung. Ein Checkpoint kodiert eine prüfbare Invariante, die mechanisch oder als definierter LLM-Review gegen ein Projekt bewertet werden kann.</p></details>
-          <details><summary>Wie wird verhindert, dass Skills zu großen Wissenssammlungen werden?</summary><p>Skill-Inhalt muss seinen Kontextpreis verdienen. Bevorzugt werden organisationsspezifisches Wissen, reale Failure Patterns, problematische volatile Fakten, ausführbare Validatoren, Inference-Suppression und Anti-Rationalization-Guards. Fakten und Trigger haben einen kanonischen Owner – oft außerhalb des Agent-Systems; Details werden on demand referenziert.</p></details>
+          <details><summary>Wie wird verhindert, dass Skills zu großen Wissenssammlungen werden?</summary><p>Skill-Inhalt muss seinen Kontextpreis verdienen. Bevorzugt werden organisationsspezifisches Wissen, reale Failure Patterns, volatile Fakten, die Modelle zuverlässig falsch haben, ausführbare Validatoren, Inference-Suppression und Anti-Rationalization-Guards. Fakten und Trigger haben einen kanonischen Owner – oft außerhalb des Agent-Systems; Details werden on demand referenziert.</p></details>
           <details><summary>Wie werden Skills und Regeln geprüft?</summary><p>Automated Assessment entdeckt passende checkpoint-enabled Skills, prüft Preconditions, führt mechanische Checks und gruppierte LLM-Reviews aus, erzeugt einen Gap-Report und kann Fixes an den verantwortlichen Skill routen. Danach wird erneut geprüft.</p></details>
-          <details><summary>Wie werden Agentenregeln technisch durchgesetzt?</summary><p>Wenn eine Regel enforceable ist, wird sie nicht nur als Prosa konserviert. Je nach Fall wird sie als Checkpoint, Pre-Commit-Hook, CI-Check, Linterregel, Branch Protection oder anderes Harness-Artefakt materialisiert. Das Prinzip lautet: Authority zuerst – wem gehört diese Wahrheit? –, danach Enforceability, dann Reichweite.</p></details>
+          <details><summary>Wie werden Agentenregeln technisch durchgesetzt?</summary><p>Wenn eine Regel enforceable ist, wird sie nicht nur als Prosa konserviert. Je nach Fall wird sie als Checkpoint, Pre-Commit-Hook, CI-Check, Linterregel, Branch Protection oder anderes Harness-Artefakt materialisiert. Das Prinzip lautet: Authority zuerst – wem gehört diese Wahrheit? –, danach Enforceability, dann Reach.</p></details>
           <details><summary>Wie werden Skills verteilt?</summary><p>Skills sind versionierte Engineering-Abhängigkeiten. Sie können über Composer-Pakete, Skills in normalen Packages, direkte gelockte GitHub-Quellen sowie weitere Distributionswege in Projekte gelangen. Discovery, Trust und <code>AGENTS.md</code>-Indexierung bilden eine gemeinsame Pipeline.</p></details>
         </div>
       </div>
