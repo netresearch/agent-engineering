@@ -25,6 +25,22 @@ errors: list[str] = []
 
 PLACEHOLDERS = ("Loading…", "Loading...", "TBD", "Lorem ipsum")
 
+# Structures the two language pages describe in parallel, and that llms.txt
+# also counts. Prose drift is invisible to a structural gate, but a count is
+# not: a card added to one page or to the pages but not to llms.txt shows up
+# here as a number that no longer matches.
+COUNTED_STRUCTURES = (
+    ("destination cards", r'<article class="destination"'),
+    ("system-map steps", r'<article class="map-card"><span class="num">'),
+    ("loop cards", r'<article class="map-card"><h3>'),
+    ("principle steps", r"<div><strong>\d+\."),
+)
+
+NUMBER_WORDS = {
+    "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6,
+    "seven": 7, "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12,
+}
+
 REQUIRED_META = (
     (r'<meta name="description" content="[^"]+"', "meta description"),
     (r'<meta name="twitter:card"', "twitter:card"),
@@ -121,6 +137,10 @@ def main() -> int:
     # llms.txt is the machine-readable contract for the page: every section it
     # promises must exist on BOTH language versions, and its URLs must match.
     llms = (PUBLIC / "llms.txt").read_text(encoding="utf-8") if (PUBLIC / "llms.txt").exists() else ""
+    if (PUBLIC / "llms.txt").exists() and not llms.strip():
+        # An empty file satisfies the existence check below while making every
+        # `if llms` guard fall through, so the whole contract would pass vacuously.
+        errors.append("llms.txt is empty — every check against it would pass without measuring anything")
     for page_name in PAGE_EXPECTATIONS:
         if not (PUBLIC / page_name).exists():
             continue
@@ -132,6 +152,59 @@ def main() -> int:
     for required_url in (BASE_URL, f"{BASE_URL}en/"):
         if llms and required_url not in llms:
             errors.append(f"llms.txt does not name {required_url}")
+
+    # Counted structures: identical on both language pages, and the destination
+    # list in llms.txt has to carry the same number of entries as the pages
+    # render — the case that went undetected once already.
+    counts: dict[str, dict[str, int]] = {}
+    for page_name in PAGE_EXPECTATIONS:
+        if not (PUBLIC / page_name).exists():
+            continue
+        html = (PUBLIC / page_name).read_text(encoding="utf-8")
+        counts[page_name] = {
+            label: len(re.findall(pattern, html))
+            for label, pattern in COUNTED_STRUCTURES
+        }
+        # A count of zero is never a legitimate state here, and without this
+        # floor a stale pattern makes the parity comparison 0 == 0 — the gate
+        # would report success while measuring nothing.
+        for label, count in counts[page_name].items():
+            if count == 0:
+                errors.append(
+                    f"{page_name}: no {label} matched — the pattern in COUNTED_STRUCTURES "
+                    "no longer fits the markup, so this check is measuring nothing"
+                )
+    if len(counts) > 1:
+        reference, *others = counts
+        for label, _ in COUNTED_STRUCTURES:
+            for other in others:
+                if counts[other][label] != counts[reference][label]:
+                    errors.append(
+                        f"{label}: {reference} has {counts[reference][label]}, "
+                        f"{other} has {counts[other][label]} — the language versions must match"
+                    )
+
+    heading = re.search(r"^## The (\w+) retro destinations\s*$", llms, flags=re.M)
+    if llms and not heading:
+        errors.append("llms.txt has no '## The <number> retro destinations' heading")
+    elif heading:
+        bullets = re.findall(
+            r"^- [a-z-]+:", llms[heading.end():].split("\n##", 1)[0], flags=re.M
+        )
+        written = heading.group(1).lower()
+        promised = int(written) if written.isdigit() else NUMBER_WORDS.get(written)
+        if promised is None:
+            errors.append(f"llms.txt destinations heading: unknown number word {heading.group(1)!r}")
+        elif promised != len(bullets):
+            errors.append(
+                f"llms.txt announces {promised} destinations but lists {len(bullets)}"
+            )
+        for page_name, page_counts in counts.items():
+            if page_counts["destination cards"] != len(bullets):
+                errors.append(
+                    f"llms.txt lists {len(bullets)} destinations, "
+                    f"{page_name} renders {page_counts['destination cards']} destination cards"
+                )
 
     sitemap = (PUBLIC / "sitemap.xml").read_text(encoding="utf-8") if (PUBLIC / "sitemap.xml").exists() else ""
     for required_url in (BASE_URL, f"{BASE_URL}en/"):
