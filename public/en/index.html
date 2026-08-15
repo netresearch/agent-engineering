@@ -56,12 +56,12 @@
         "@id": "https://netresearch.github.io/agent-engineering/en/#article",
         "headline": "Netresearch Agent Engineering System",
         "alternativeHeadline": "From a real problem to a durably verified solution",
-        "description": "A technical system that converts friction and learnings from agent sessions into the appropriate durable form: skill, checkpoint, project rule, harness artifact or personal rule.",
+        "description": "A technical system that converts friction and learnings from agent sessions into the appropriate durable form: skill, checkpoint, project rule, harness artifact, upstream patch to the canonical source or personal rule.",
         "url": "https://netresearch.github.io/agent-engineering/en/",
         "mainEntityOfPage": "https://netresearch.github.io/agent-engineering/en/",
         "author": {"@id": "https://www.netresearch.de/#organization"},
         "publisher": {"@id": "https://www.netresearch.de/#organization"},
-        "dateModified": "2026-08-13",
+        "dateModified": "2026-08-15",
         "inLanguage": "en",
         "about": [
           {"@type": "Thing", "name": "AI Agent Skills"},
@@ -78,12 +78,12 @@
           {
             "@type": "Question",
             "name": "What is the Netresearch Agent Engineering System?",
-            "acceptedAnswer": {"@type": "Answer", "text": "A closed learning and enforcement loop for coding agents. Real work produces friction and learnings; retro classifies them; skills, checkpoints, project rules or harness artifacts materialize them; assessment and CI verify the effect; the next session benefits from it."}
+            "acceptedAnswer": {"@type": "Answer", "text": "A closed learning and enforcement loop for coding agents. Real work produces friction and learnings; retro classifies them; skills, checkpoints, project rules, harness artifacts or upstream patches to the canonical source materialize them; assessment and CI verify the effect; the next session benefits from it."}
           },
           {
             "@type": "Question",
             "name": "How do new skills come about at Netresearch?",
-            "acceptedAnswer": {"@type": "Answer", "text": "Not from speculative topic lists, but retrospectively from real problems, recurring friction and reusable learnings. A new skill is only one possible destination; rules that can be checked mechanically are preferably materialized as a checkpoint or as enforcement."}
+            "acceptedAnswer": {"@type": "Answer", "text": "Not from speculative topic lists, but retrospectively from real problems, recurring friction and reusable learnings. A new skill is only one possible destination; facts owned elsewhere go upstream to their canonical source, and rules that can be checked mechanically are preferably materialized as a checkpoint or as enforcement."}
           },
           {
             "@type": "Question",
@@ -98,7 +98,7 @@
           {
             "@type": "Question",
             "name": "How is it prevented that skills grow into large knowledge dumps?",
-            "acceptedAnswer": {"@type": "Answer", "text": "Skill content has to earn its context price. Preferred content is organization-specific knowledge, real failure patterns, volatile facts that models reliably get wrong, executable validators, inference suppression and anti-rationalization guards. Facts and triggers have a canonical owner; details are referenced on demand."}
+            "acceptedAnswer": {"@type": "Answer", "text": "Skill content has to earn its context price. Preferred content is organization-specific knowledge, real failure patterns, volatile facts that models reliably get wrong, executable validators, inference suppression and anti-rationalization guards. Facts and triggers have a canonical owner – often outside the agent system; details are referenced on demand."}
           },
           {
             "@type": "Question",
@@ -108,7 +108,7 @@
           {
             "@type": "Question",
             "name": "How are agent rules enforced technically?",
-            "acceptedAnswer": {"@type": "Answer", "text": "When a rule is enforceable, it is not merely preserved as prose. Depending on the case it is materialized as a checkpoint, pre-commit hook, CI check, linter rule, branch protection or another harness artifact. The principle is: enforceability first, reach second."}
+            "acceptedAnswer": {"@type": "Answer", "text": "When a rule is enforceable, it is not merely preserved as prose. Depending on the case it is materialized as a checkpoint, pre-commit hook, CI check, linter rule, branch protection or another harness artifact. The principle is: authority first – who owns this truth? – then enforceability, then reach."}
           },
           {
             "@type": "Question",
@@ -435,7 +435,7 @@
     .map-arrow::before { content: "→"; }
     .loop-row {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 12px;
       margin-top: 12px;
     }
@@ -504,7 +504,7 @@
     .principle {
       margin-top: 38px;
       display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
       gap: 20px;
       align-items: center;
       border: 1px solid var(--nr-line);
@@ -814,6 +814,9 @@
       .map-arrow { height: 36px; }
       .map-arrow::before { content: "↓"; }
       .loop-row { grid-template-columns: repeat(2,1fr); }
+      .loop-row .map-card:last-child { grid-column: 1 / -1; }
+      .principle { grid-template-columns: 1fr; }
+      .principle-arrow { transform: rotate(90deg); justify-self: center; }
       .destination-grid, .grid-3, .source-links { grid-template-columns: repeat(2,1fr); }
       .assessment-flow { grid-template-columns: repeat(2,1fr); }
       .assessment-step:last-child { grid-column: 1 / -1; }
@@ -832,8 +835,6 @@
       .hero { padding-top: 54px; }
       .hero-proof, .grid-2, .grid-3, .destination-grid, .loop-row, .maturity, .source-links { grid-template-columns: 1fr; }
       .section { padding: 68px 0; }
-      .principle { grid-template-columns: 1fr; }
-      .principle-arrow { transform: rotate(90deg); justify-self: center; }
       .source-row { grid-template-columns: 1fr; gap: 8px; }
       .assessment-flow { grid-template-columns: 1fr; }
       .assessment-step:last-child { grid-column: auto; }
@@ -904,7 +905,7 @@
         </div>
         <div class="hero-proof" aria-label="Core principles">
           <div class="proof-item"><strong>Problem-driven</strong><span>Learnings emerge retrospectively from real work.</span></div>
-          <div class="proof-item"><strong>Enforceability first</strong><span>Verifiable rules become gates instead of prose reminders.</span></div>
+          <div class="proof-item"><strong>Authority first</strong><span>Every truth moves to its owner; verifiable rules become gates.</span></div>
           <div class="proof-item"><strong>Source of truth</strong><span>Project knowledge stays in the project and is referenced.</span></div>
           <div class="proof-item"><strong>Closed loop</strong><span>Materialize, verify, distribute, learn again.</span></div>
         </div>
@@ -923,11 +924,12 @@
           <div class="map-arrow" aria-hidden="true"></div>
           <article class="map-card"><span class="num">2</span><h3>Friction & Learning</h3><p>Mistakes, unnecessary loops, good new patterns or missing rules become visible as a learning signal.</p></article>
           <div class="map-arrow" aria-hidden="true"></div>
-          <article class="map-card"><span class="num">3</span><h3>Retro classifies</h3><p>Not every learning belongs in a skill. Enforceability and reach are determined first.</p></article>
+          <article class="map-card"><span class="num">3</span><h3>Retro classifies</h3><p>Not every learning belongs in a skill. Authority, enforceability and reach are determined – in that order.</p></article>
         </div>
         <div class="loop-row">
-          <article class="map-card"><h3>Materialize</h3><p>Skill, checkpoint, project rule, harness artifact or personal rule.</p></article>
+          <article class="map-card"><h3>Materialize</h3><p>Skill, checkpoint, project rule, harness artifact, upstream patch or personal rule.</p></article>
           <article class="map-card"><h3>Verify</h3><p>Validators, evals, assessment, CI, hooks and review make the effect visible.</p></article>
+          <article class="map-card"><h3>Reconcile & prune</h3><p>Once a fact lands with its canonical owner, the local copy shrinks to a reference. A system that can only add degrades.</p></article>
           <article class="map-card"><h3>Version & distribute</h3><p>Skills and rules become reproducibly available as engineering dependencies.</p></article>
           <article class="map-card"><h3>Next session</h3><p>The next agent already starts out with the preserved experience.</p></article>
         </div>
@@ -935,7 +937,7 @@
       </div>
     </section>
 
-    <section class="section knowledge-section" id="retro" data-ai-source data-search-title="Retro: Learning Router" data-search-keywords="retro friction learning destinations user memory project rule skill update new skill checkpoint harness artefact">
+    <section class="section knowledge-section" id="retro" data-ai-source data-search-title="Retro: Learning Router" data-search-keywords="retro friction learning destinations user memory project rule skill update new skill checkpoint harness artefact canonical source authority">
       <div class="container">
         <span class="section-kicker">Origin</span>
         <h2>Retro is the learning router.</h2>
@@ -948,15 +950,18 @@
           <article class="destination"><span class="label">new-skill</span><h3>New skill</h3><p>The friction reveals a new, recurring capability category that no existing skill sensibly owns.</p></article>
           <article class="destination" data-kind="gate"><span class="label">checkpoint</span><h3>Verifiable invariant</h3><p>A rule can be checked against a project mechanically or as a defined LLM review.</p></article>
           <article class="destination" data-kind="gate"><span class="label">harness-artefact</span><h3>Technical enforcement</h3><p>The right answer is a hook, CI gate, linter, ruleset, template or another self-sustaining project artifact.</p></article>
+          <article class="destination"><span class="label">canonical-source</span><h3>Canonical source</h3><p>The fact belongs to an artifact outside the agent system – official documentation, code or a schema. The fix goes there as a patch; the skill keeps only a reference plus the agent-specific delta.</p></article>
         </div>
 
         <div class="principle">
-          <div><strong>1. Enforceability</strong><p>Can the rule be enforced technically as a gate, check or artifact? That is stronger than a reminder written in prose.</p></div>
+          <div><strong>1. Authority</strong><p>Who owns this truth? A fact about the world moves to its canonical owner – often outside the agent system. A skill owns only agent behavior and its own procedure.</p></div>
           <div class="principle-arrow" aria-hidden="true">→</div>
-          <div><strong>2. Reach</strong><p>Only then is it decided whether the learning is reusable personally, project-locally or organization-wide.</p></div>
+          <div><strong>2. Enforceability</strong><p>Can the rule be enforced technically as a gate, check or artifact? That is stronger than a reminder written in prose.</p></div>
+          <div class="principle-arrow" aria-hidden="true">→</div>
+          <div><strong>3. Reach</strong><p>Only then is it decided whether the learning is reusable personally, project-locally or organization-wide.</p></div>
         </div>
 
-        <div class="answer-box"><strong>Paired materialization:</strong> When a rule is technically enforceable in the current repository and the same gate is needed in sibling projects, a learning can be materialized on two tracks: the concrete gate in the project plus a skill change carrying the installation recipe for further projects.</div>
+        <div class="answer-box"><strong>Paired materialization:</strong> When a rule is technically enforceable in the current repository and the same gate is needed in sibling projects, a learning can be materialized on two tracks: the concrete gate in the project plus a skill change carrying the installation recipe for further projects. The same pairing also works upstream: the patch to the canonical owner plus the skill cleanup that reduces the local copy to a reference once the patch is accepted.</div>
       </div>
     </section>
 
@@ -1006,7 +1011,7 @@
         </div>
 
         <div class="grid-2">
-          <article class="card"><span class="card-code">canonical ownership</span><h3>One fact, one owner.</h3><p>Facts and trigger phrases should have a canonical home. Other skills reference the owner instead of copying the same fact and drifting apart later.</p></article>
+          <article class="card"><span class="card-code">canonical ownership</span><h3>One fact, one owner.</h3><p>Facts and trigger phrases should have a canonical home – often outside the agent system, in official documentation or code. Other skills reference the owner instead of copying the same fact and drifting apart later.</p></article>
           <article class="card orange"><span class="card-code">eval evidence</span><h3>“The model forgets it” is a testable claim.</h3><p>If skill content is justified only by a model knowing something but not activating it reliably, an A/B eval should make the benefit visible.</p></article>
         </div>
 
@@ -1086,9 +1091,9 @@
           &nbsp;&nbsp;↓<br>
           retro detects friction + learning<br>
           &nbsp;&nbsp;↓<br>
-          classified by <span class="orange">enforceability</span> and reach<br>
+          classified by <span class="orange">authority</span>, enforceability and reach<br>
           &nbsp;&nbsp;↓<br>
-          skill / checkpoint / harness / project rule<br>
+          skill / checkpoint / harness / project rule / upstream patch<br>
           &nbsp;&nbsp;↓<br>
           Eval + Assessment + CI/Hook<br>
           &nbsp;&nbsp;↓<br>
@@ -1119,13 +1124,13 @@
         <span class="section-kicker">FAQ</span>
         <h2>Answers to the core questions.</h2>
         <div class="faq">
-          <details><summary>What is the Netresearch Agent Engineering System?</summary><p>A closed learning and enforcement loop for coding agents. Real work produces friction and learnings; retro classifies them; skills, checkpoints, project rules or harness artifacts materialize them; assessment and CI verify the effect; the next session benefits from it.</p></details>
-          <details><summary>How do new skills come about?</summary><p>Not from speculative topic lists, but retrospectively from real problems, recurring friction and reusable learnings. A new skill is only one possible destination; rules that can be checked mechanically are preferably materialized as a checkpoint or as enforcement.</p></details>
+          <details><summary>What is the Netresearch Agent Engineering System?</summary><p>A closed learning and enforcement loop for coding agents. Real work produces friction and learnings; retro classifies them; skills, checkpoints, project rules, harness artifacts or upstream patches to the canonical source materialize them; assessment and CI verify the effect; the next session benefits from it.</p></details>
+          <details><summary>How do new skills come about?</summary><p>Not from speculative topic lists, but retrospectively from real problems, recurring friction and reusable learnings. A new skill is only one possible destination; facts owned elsewhere go upstream to their canonical source, and rules that can be checked mechanically are preferably materialized as a checkpoint or as enforcement.</p></details>
           <details><summary>What role does AGENTS.md play?</summary><p><code>AGENTS.md</code> is a compact index pointing to the authoritative project truth. Architecture, commands, dependencies and details stay in the actual sources such as <code>docs/</code>, <code>composer.json</code>, Makefile, DDEV configuration and scripts. The harness verifies that references and documented commands are correct.</p></details>
           <details><summary>What is the difference between a skill and a checkpoint?</summary><p>A skill carries workflow, decisions, failure patterns and non-mechanical guidance. A checkpoint encodes a verifiable invariant that can be evaluated against a project mechanically or as a defined LLM review.</p></details>
-          <details><summary>How is it prevented that skills grow into large knowledge dumps?</summary><p>Skill content has to earn its context price. Preferred content is organization-specific knowledge, real failure patterns, problematic volatile facts, executable validators, inference suppression and anti-rationalization guards. Facts and triggers have a canonical owner; details are referenced on demand.</p></details>
+          <details><summary>How is it prevented that skills grow into large knowledge dumps?</summary><p>Skill content has to earn its context price. Preferred content is organization-specific knowledge, real failure patterns, volatile facts that models reliably get wrong, executable validators, inference suppression and anti-rationalization guards. Facts and triggers have a canonical owner – often outside the agent system; details are referenced on demand.</p></details>
           <details><summary>How are skills and rules verified?</summary><p>Automated assessment discovers matching checkpoint-enabled skills, checks preconditions, runs mechanical checks and grouped LLM reviews, produces a gap report and can route fixes to the responsible skill. After that, verification runs again.</p></details>
-          <details><summary>How are agent rules enforced technically?</summary><p>When a rule is enforceable, it is not merely preserved as prose. Depending on the case it is materialized as a checkpoint, pre-commit hook, CI check, linter rule, branch protection or another harness artifact. The principle is: enforceability first, reach second.</p></details>
+          <details><summary>How are agent rules enforced technically?</summary><p>When a rule is enforceable, it is not merely preserved as prose. Depending on the case it is materialized as a checkpoint, pre-commit hook, CI check, linter rule, branch protection or another harness artifact. The principle is: authority first – who owns this truth? – then enforceability, then reach.</p></details>
           <details><summary>How are skills distributed?</summary><p>Skills are versioned engineering dependencies. They can reach projects via Composer packages, skills inside ordinary packages, directly locked GitHub sources and further distribution paths. Discovery, trust and <code>AGENTS.md</code> indexing form one shared pipeline.</p></details>
         </div>
       </div>
