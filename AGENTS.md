@@ -20,15 +20,19 @@ Live: https://netresearch.github.io/agent-engineering/
   names a different number of destinations than the pages render. When a
   content model changes, grep the whole of `public/` for the **old** vocabulary
   rather than re-reading the sections you remember — `llms.txt`, the JSON-LD
-  answers and the ASCII loop diagram all encode it too.
+  answers and the arrow diagram in the `code-block` of the `#learning-loop`
+  section all encode it too. `llms.txt` carries one format the gate depends on:
+  the destinations heading must read `## The <number> retro destinations`, with
+  the number as a word or a digit, followed by one `- name: …` bullet per
+  destination.
 - `public/og-image.png` / `public/og-image-en.png` — committed social
   previews, rendered from `scripts/og-template.html` /
   `scripts/og-template-en.html` via `node scripts/render-og.mjs`. Never edit
-  the PNGs directly; edit the template and re-render. A fresh worktree has no
-  `node_modules`, so the render aborts with `Cannot find package 'puppeteer'` —
-  link them (`ln -s ../main/node_modules node_modules`) or run `npm ci`, and
-  keep any ad-hoc Puppeteer script **inside** the worktree, because Node
-  resolves packages from the script's own directory upwards.
+  the PNGs directly; edit the template and re-render. A fresh checkout has no
+  `node_modules`, so the render aborts with `Cannot find package 'puppeteer'`;
+  run `npm ci` first. Keep any ad-hoc Puppeteer script **inside** the checkout,
+  because Node resolves packages upwards from the script's own directory, not
+  from the working directory.
 - `public/llms.txt`, `public/robots.txt`, `public/sitemap.xml` — machine-facing
   contract; `scripts/verify_site.py` cross-checks them against the page.
 - `.github/workflows/pages.yml` publishes `public/` through GitHub Pages.

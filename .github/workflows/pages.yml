@@ -4,12 +4,16 @@ on:
   push:
     branches:
       - main
+  # Pull requests run the gate half only. Without this the gates first execute
+  # after the merge, which means a change to the gate itself is never exercised
+  # by the checks on its own pull request.
+  pull_request:
   workflow_dispatch:
 
 permissions: {}
 
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -45,6 +49,7 @@ jobs:
 
   deploy:
     needs: build
+    if: github.event_name != 'pull_request'
     uses: netresearch/.github/.github/workflows/pages-deploy.yml@main
     permissions:
       pages: write

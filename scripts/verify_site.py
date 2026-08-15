@@ -37,8 +37,8 @@ COUNTED_STRUCTURES = (
 )
 
 NUMBER_WORDS = {
-    "four": 4, "five": 5, "six": 6, "seven": 7,
-    "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12,
+    "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6,
+    "seven": 7, "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12,
 }
 
 REQUIRED_META = (
@@ -137,6 +137,10 @@ def main() -> int:
     # llms.txt is the machine-readable contract for the page: every section it
     # promises must exist on BOTH language versions, and its URLs must match.
     llms = (PUBLIC / "llms.txt").read_text(encoding="utf-8") if (PUBLIC / "llms.txt").exists() else ""
+    if (PUBLIC / "llms.txt").exists() and not llms.strip():
+        # An empty file satisfies the existence check below while making every
+        # `if llms` guard fall through, so the whole contract would pass vacuously.
+        errors.append("llms.txt is empty — every check against it would pass without measuring anything")
     for page_name in PAGE_EXPECTATIONS:
         if not (PUBLIC / page_name).exists():
             continue
@@ -161,6 +165,15 @@ def main() -> int:
             label: len(re.findall(pattern, html))
             for label, pattern in COUNTED_STRUCTURES
         }
+        # A count of zero is never a legitimate state here, and without this
+        # floor a stale pattern makes the parity comparison 0 == 0 — the gate
+        # would report success while measuring nothing.
+        for label, count in counts[page_name].items():
+            if count == 0:
+                errors.append(
+                    f"{page_name}: no {label} matched — the pattern in COUNTED_STRUCTURES "
+                    "no longer fits the markup, so this check is measuring nothing"
+                )
     if len(counts) > 1:
         reference, *others = counts
         for label, _ in COUNTED_STRUCTURES:
@@ -178,7 +191,8 @@ def main() -> int:
         bullets = re.findall(
             r"^- [a-z-]+:", llms[heading.end():].split("\n##", 1)[0], flags=re.M
         )
-        promised = NUMBER_WORDS.get(heading.group(1).lower())
+        written = heading.group(1).lower()
+        promised = int(written) if written.isdigit() else NUMBER_WORDS.get(written)
         if promised is None:
             errors.append(f"llms.txt destinations heading: unknown number word {heading.group(1)!r}")
         elif promised != len(bullets):
