@@ -18,8 +18,9 @@ The Netresearch Agent Engineering System is a closed learning and enforcement lo
 4. skill-repo-skill standardizes skill structure, quality, canonical ownership, references, validation, and release discipline.
 5. automated-assessment-skill evaluates checkpoint-enabled skills against real repositories and produces structured gap reports.
 6. agent-harness-skill makes repository agent-readiness self-sustaining through AGENTS.md, docs, CI, hooks, templates, and enforcement.
-7. Distribution mechanisms make skills versioned engineering dependencies that can be discovered and trusted by projects.
-8. The next real session starts from the accumulated experience and generates new evidence for the loop.
+7. agent-system-evals measures the assembled system on realistic, deliberately underspecified requests: whether the agent discovers and activates the right skill at all, not only whether a loaded skill helps.
+8. Distribution mechanisms make skills versioned engineering dependencies that can be discovered and trusted by projects.
+9. The next real session starts from the accumulated experience and generates new evidence for the loop.
 
 ## Key principles
 
@@ -30,7 +31,8 @@ The Netresearch Agent Engineering System is a closed learning and enforcement lo
 - Project facts stay in authoritative project sources such as docs/ARCHITECTURE.md, composer.json, composer.lock, Makefile, scripts, DDEV config, CI, hooks, and rulesets.
 - A skill carries workflow, decisions, failure patterns, org policy, inference suppression, and anti-rationalization guards when those earn their context cost.
 - Facts and trigger phrases should have one canonical owner; other skills reference rather than duplicate them.
-- Claims that a model "knows but forgets" should be supported by A/B eval evidence.
+- Claims that a model "knows but forgets" should be supported by A/B eval evidence. A delta is not a property of the skill: it is a function of skill version, model, agent harness, task and tool environment, and is reported bound to that tuple.
+- Effect is measured on two levels: a per-skill A/B eval asks whether a loaded skill helps; a system eval asks whether the agent works out for itself that it needs the skill, from a realistic underspecified request that names no skill, tool or method.
 - Checkpoints turn durable requirements into mechanically or semantically verifiable specifications.
 - The harness verifies artifacts and integration outcomes, not which tool created them.
 
@@ -63,6 +65,7 @@ Consolidating includes deleting: reconcile & prune, outcome grading and audit re
 - https://github.com/netresearch/agent-harness-skill
 - https://github.com/netresearch/skill-repo-skill
 - https://github.com/netresearch/automated-assessment-skill
+- https://github.com/netresearch/agent-system-evals
 - https://github.com/netresearch/composer-agent-skill-plugin
 - https://github.com/netresearch
 
@@ -73,7 +76,7 @@ Consolidating includes deleting: reconcile & prune, outcome grading and audit re
 - #retro — friction and learning routing
 - #project-context — AGENTS.md and project source-of-truth model
 - #quality — skill content rubric, canonical ownership, A/B evidence
-- #verification — checkpoints and automated assessment
+- #verification — checkpoints, automated assessment, and the two eval levels
 - #harness — project enforcement and maturity
 - #distribution — versioning, trust, discovery, distribution
 - #learning-loop — why the system compounds experience

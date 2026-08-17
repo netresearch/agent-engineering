@@ -560,6 +560,7 @@
     .source-row code { font-family: var(--nr-font-mono); color: var(--nr-primary); font-size: 13px; overflow-wrap: anywhere; }
     .source-row p { color: var(--nr-text-muted); }
     .memory-forms { margin-top: 34px; }
+    .section-subhead { margin-top: 44px; }
 
     .rubric-list { margin-top: 36px; counter-reset: rubric; display: grid; gap: 12px; }
     .rubric-item {
@@ -1053,7 +1054,7 @@
 
         <div class="grid-2">
           <article class="card"><span class="card-code">canonical ownership</span><h3>Ein Fakt, ein Owner.</h3><p>Fakten und Triggerphrasen sollen eine kanonische Heimat haben – oft außerhalb des Agent-Systems, in offizieller Dokumentation oder Code. Andere Skills referenzieren den Owner, statt denselben Fakt zu kopieren und später auseinanderzudriften.</p></article>
-          <article class="card orange"><span class="card-code">eval evidence</span><h3>„Das Modell vergisst es“ ist ein Test-Claim.</h3><p>Wenn Skill-Inhalt nur damit begründet wird, dass ein Modell etwas zwar weiß, aber nicht zuverlässig aktiviert, sollte ein A/B-Eval den Nutzen sichtbar machen.</p></article>
+          <article class="card orange"><span class="card-code">eval evidence</span><h3>„Das Modell vergisst es“ ist ein Test-Claim.</h3><p>Wenn Skill-Inhalt nur damit begründet wird, dass ein Modell etwas zwar weiß, aber nicht zuverlässig aktiviert, sollte ein A/B-Eval den Nutzen sichtbar machen. Der gemessene Delta gilt dann für <em>eine</em> Skill-Version unter einem Modell, einem Harness und einem Eval-Set – ein stärkerer Actor kann denselben Schluss selbst ziehen, dann bleibt nur der Kontextpreis.</p></article>
         </div>
 
         <div class="code-block" aria-label="Skill Content Filter">
@@ -1064,7 +1065,7 @@
       </div>
     </section>
 
-    <section class="section knowledge-section" id="verification" data-ai-source data-search-title="Assessment, Checkpoints und Verifikation" data-search-keywords="automated assessment checkpoints mechanical llm review gap report autofix assessment first verification">
+    <section class="section knowledge-section" id="verification" data-ai-source data-search-title="Assessment, Checkpoints und Verifikation" data-search-keywords="automated assessment checkpoints mechanical llm review gap report autofix assessment first verification eval ab delta baseline system eval open forward review discovery aktivierung agent-system-evals">
       <div class="container">
         <span class="section-kicker">Prüfung</span>
         <h2>Aus Anleitung wird eine prüfbare Spezifikation.</h2>
@@ -1083,6 +1084,14 @@
           <article class="card"><div class="card-icon">L</div><h3>LLM review</h3><p>Für Architektur-, Dokumentations- oder Qualitätsurteile, die Kontextverständnis brauchen.</p></article>
           <article class="card orange"><div class="card-icon">G</div><h3>Harness gate</h3><p>Für Regeln, die vor einer Aktion blockieren müssen – etwa Hook, CI, Branch Protection oder Linter.</p></article>
         </div>
+
+        <h3 class="section-subhead">Zwei Ebenen von Evals</h3>
+        <div class="grid-2">
+          <article class="card"><span class="card-code">per-skill A/B eval</span><h3>Hilft der Skill, wenn er geladen ist?</h3><p>Derselbe Prompt mit und ohne Skill-Kontext. Gemessen wird der Delta gegen eine No-Skill-Baseline – gebunden an Skill-Version, Modell, Harness und Eval-Set, nicht als universelle Eigenschaft des Skills.</p></article>
+          <article class="card orange"><span class="card-code">system eval</span><h3>Merkt der Agent, dass er ihn braucht?</h3><p>Ein realistischer, absichtlich unterspezifizierter Auftrag – ohne Angabe von Skill, Tool oder Methode. Discovery und richtige Aktivierung sind damit Teil des Tests, nicht seine Voraussetzung.</p></article>
+        </div>
+
+        <div class="answer-box"><strong>Warum beides:</strong> Ein Eval, das dem Agenten die Methode vorgibt, misst Prompt-Befolgung. Erst der Open Forward Review in <a href="https://github.com/netresearch/agent-system-evals">agent-system-evals</a> prüft, ob der Agent den Auftrag selbst richtig rahmt – mit mehrdimensionalem Scoring statt einer Kennzahl, weil ein Lauf, der gut untersucht und nichts Brauchbares berichtet, und ein Lauf, der richtig rät, beide Fehlschläge sind.</div>
       </div>
     </section>
 
@@ -1188,6 +1197,7 @@
           <a class="source-link" href="https://github.com/netresearch/agent-harness-skill"><strong>agent-harness-skill</strong><span>Agent-Readiness, Verifikation, Bootstrap und Enforcement.</span></a>
           <a class="source-link" href="https://github.com/netresearch/skill-repo-skill"><strong>skill-repo-skill</strong><span>Skill-Struktur, Qualitätsregeln, Release und Repository-Standards.</span></a>
           <a class="source-link" href="https://github.com/netresearch/automated-assessment-skill"><strong>automated-assessment-skill</strong><span>Checkpoint-Laufzeit, Gap Reports, Autofix und Re-Verification.</span></a>
+          <a class="source-link" href="https://github.com/netresearch/agent-system-evals"><strong>agent-system-evals</strong><span>Open Forward Reviews: misst am unterspezifizierten Auftrag, ob der Agent den Job selbst richtig rahmt.</span></a>
           <a class="source-link" href="https://github.com/netresearch/composer-agent-skill-plugin"><strong>composer-agent-skill-plugin</strong><span>Discovery, Trust, Locking und Composer-basierte Distribution.</span></a>
           <a class="source-link" href="https://github.com/netresearch"><strong>Netresearch auf GitHub</strong><span>Fachskills und generische Engineering-Skills als sichtbare Outputs des Systems.</span></a>
         </div>

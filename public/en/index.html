@@ -560,6 +560,7 @@
     .source-row code { font-family: var(--nr-font-mono); color: var(--nr-primary); font-size: 13px; overflow-wrap: anywhere; }
     .source-row p { color: var(--nr-text-muted); }
     .memory-forms { margin-top: 34px; }
+    .section-subhead { margin-top: 44px; }
 
     .rubric-list { margin-top: 36px; counter-reset: rubric; display: grid; gap: 12px; }
     .rubric-item {
@@ -1053,7 +1054,7 @@
 
         <div class="grid-2">
           <article class="card"><span class="card-code">canonical ownership</span><h3>One fact, one owner.</h3><p>Facts and trigger phrases should have a canonical home – often outside the agent system, in official documentation or code. Other skills reference the owner instead of copying the same fact and drifting apart later.</p></article>
-          <article class="card orange"><span class="card-code">eval evidence</span><h3>“The model forgets it” is a testable claim.</h3><p>If skill content is justified only by a model knowing something but not activating it reliably, an A/B eval should make the benefit visible.</p></article>
+          <article class="card orange"><span class="card-code">eval evidence</span><h3>“The model forgets it” is a testable claim.</h3><p>If skill content is justified only by a model knowing something but not activating it reliably, an A/B eval should make the benefit visible. The measured delta then holds for <em>one</em> skill version under one model, one harness and one eval set – a stronger actor may derive the same thing on its own, and then only the context cost remains.</p></article>
         </div>
 
         <div class="code-block" aria-label="Skill Content Filter">
@@ -1064,7 +1065,7 @@
       </div>
     </section>
 
-    <section class="section knowledge-section" id="verification" data-ai-source data-search-title="Assessment, checkpoints and verification" data-search-keywords="automated assessment checkpoints mechanical llm review gap report autofix assessment first verification">
+    <section class="section knowledge-section" id="verification" data-ai-source data-search-title="Assessment, checkpoints and verification" data-search-keywords="automated assessment checkpoints mechanical llm review gap report autofix assessment first verification eval ab delta baseline system eval open forward review discovery activation agent-system-evals">
       <div class="container">
         <span class="section-kicker">Verification</span>
         <h2>Guidance becomes a verifiable specification.</h2>
@@ -1083,6 +1084,14 @@
           <article class="card"><div class="card-icon">L</div><h3>LLM review</h3><p>For architecture, documentation or quality judgments that need an understanding of context.</p></article>
           <article class="card orange"><div class="card-icon">G</div><h3>Harness gate</h3><p>For rules that have to block before an action – a hook, CI, branch protection or linter.</p></article>
         </div>
+
+        <h3 class="section-subhead">Two layers of evals</h3>
+        <div class="grid-2">
+          <article class="card"><span class="card-code">per-skill A/B eval</span><h3>Does the skill help once it is loaded?</h3><p>The same prompt with and without the skill in context. What it measures is a delta against a no-skill baseline – bound to a skill version, a model, a harness and an eval set, not a universal property of the skill.</p></article>
+          <article class="card orange"><span class="card-code">system eval</span><h3>Does the agent realize it needs the skill?</h3><p>A realistic, deliberately underspecified request – naming no skill, no tool and no method. Discovery and correct activation are part of the test rather than a precondition of it.</p></article>
+        </div>
+
+        <div class="answer-box"><strong>Why both:</strong> an eval that hands the agent the method measures prompt compliance. Only the Open Forward Review in <a href="https://github.com/netresearch/agent-system-evals">agent-system-evals</a> asks whether the agent frames the job correctly by itself – scored across several dimensions rather than as one number, because a run that investigates well and reports nothing useful and a run that guesses correctly are both failures.</div>
       </div>
     </section>
 
@@ -1188,6 +1197,7 @@
           <a class="source-link" href="https://github.com/netresearch/agent-harness-skill"><strong>agent-harness-skill</strong><span>Agent readiness, verification, bootstrap and enforcement.</span></a>
           <a class="source-link" href="https://github.com/netresearch/skill-repo-skill"><strong>skill-repo-skill</strong><span>Skill structure, quality rules, release and repository standards.</span></a>
           <a class="source-link" href="https://github.com/netresearch/automated-assessment-skill"><strong>automated-assessment-skill</strong><span>Checkpoint runtime, gap reports, autofix and re-verification.</span></a>
+          <a class="source-link" href="https://github.com/netresearch/agent-system-evals"><strong>agent-system-evals</strong><span>Open Forward Reviews: measures on an underspecified request whether the agent frames the job correctly by itself.</span></a>
           <a class="source-link" href="https://github.com/netresearch/composer-agent-skill-plugin"><strong>composer-agent-skill-plugin</strong><span>Discovery, trust, locking and Composer-based distribution.</span></a>
           <a class="source-link" href="https://github.com/netresearch"><strong>Netresearch on GitHub</strong><span>Domain skills and generic engineering skills as the visible outputs of the system.</span></a>
         </div>
