@@ -34,6 +34,7 @@ COUNTED_STRUCTURES = (
     ("system-map steps", r'<article class="map-card"><span class="num">'),
     ("loop cards", r'<article class="map-card"><h3>'),
     ("principle steps", r"<div><strong>\d+\."),
+    ("memory forms", r'<div class="source-row memory-row">'),
 )
 
 NUMBER_WORDS = {

@@ -16,7 +16,7 @@ Live: https://netresearch.github.io/agent-engineering/
   pins per-page canonical/og-image/lang and the shared section anchors, but it
   cannot see missing prose — keep the translation in sync yourself. It does
   count the parallel structures (destination cards, system-map and loop cards,
-  principle steps) and fails when the two pages disagree or when `llms.txt`
+  principle steps, memory forms) and fails when the two pages disagree or when `llms.txt`
   names a different number of destinations than the pages render. When a
   content model changes, grep the whole of `public/` for the **old** vocabulary
   rather than re-reading the sections you remember — `llms.txt`, the JSON-LD

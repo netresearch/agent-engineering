@@ -87,6 +87,11 @@
           },
           {
             "@type": "Question",
+            "name": "Where is the memory in this system?",
+            "acceptedAnswer": {"@type": "Answer", "text": "In the form an experience takes after consolidation. The session transcript is raw experience and transient; retro consolidates it into reusable experience as a skill, executable or enforceable experience as a checkpoint or harness artifact, project instruction in AGENTS.md, canonical facts in docs, code and config, and a durable personal instruction as a personal-rule. There is deliberately no vector database and no similarity search over old sessions: consolidating includes deleting, because experience reused unfiltered carries errors forward."}
+          },
+          {
+            "@type": "Question",
             "name": "What role does AGENTS.md play?",
             "acceptedAnswer": {"@type": "Answer", "text": "AGENTS.md is a compact index pointing to the authoritative project truth. Architecture, commands, dependencies and details stay in the actual sources such as docs, composer.json, Makefile, DDEV configuration and scripts. The harness verifies that references and documented commands are correct."}
           },
@@ -554,6 +559,7 @@
     }
     .source-row code { font-family: var(--nr-font-mono); color: var(--nr-primary); font-size: 13px; overflow-wrap: anywhere; }
     .source-row p { color: var(--nr-text-muted); }
+    .memory-forms { margin-top: 34px; }
 
     .rubric-list { margin-top: 36px; counter-reset: rubric; display: grid; gap: 12px; }
     .rubric-item {
@@ -871,6 +877,7 @@
 
       <nav class="nav-links" aria-label="Main navigation">
         <a href="#system">System</a>
+        <a href="#memory">Memory</a>
         <a href="#retro">Retro</a>
         <a href="#project-context">Project context</a>
         <a href="#quality">Quality</a>
@@ -934,6 +941,40 @@
           <article class="map-card"><h3>Next session</h3><p>The next agent already starts out with the preserved experience.</p></article>
         </div>
         <div class="loop-return"><strong>Feedback loop:</strong> New work produces new evidence – the system keeps learning.</div>
+      </div>
+    </section>
+
+    <section class="section knowledge-section" id="memory" data-ai-source data-search-title="Memory and consolidation" data-search-keywords="memory experience consolidation episodic procedural transcript vector database retrieval pruning deletion personal rule">
+      <div class="container">
+        <span class="section-kicker">Memory</span>
+        <h2>Skills are our consolidated experience.</h2>
+        <p class="section-intro">A coding agent has no memory across sessions. The question is therefore not how a session gets stored, but what form an experience has to take so that the next session already brings it along. A skill does not store the session – it stores the reusable change in behavior distilled from sessions.</p>
+
+        <div class="code-block" aria-label="From raw experience to consolidated experience">
+          <span class="teal">raw experience</span> · episodic, bound to one session<br>
+          &nbsp;&nbsp;↓<br>
+          <span class="orange">retro</span> = consolidation<br>
+          &nbsp;&nbsp;↓<br>
+          skill&nbsp;&nbsp;·&nbsp;&nbsp;rule&nbsp;&nbsp;·&nbsp;&nbsp;gate<br>
+          &nbsp;&nbsp;↓<br>
+          <span class="teal">consolidated experiential and procedural knowledge</span>
+        </div>
+
+        <div class="source-list memory-forms" aria-label="Persistence forms and what they mean">
+          <div class="source-row memory-row"><code>Session transcript</code><p>Raw experience: complete, unsorted and normally transient. Raw material, not result.</p></div>
+          <div class="source-row memory-row"><code>Skill</code><p>Consolidated, reusable experience. Workflow, decisions and failure patterns, distilled from real sessions.</p></div>
+          <div class="source-row memory-row"><code>Checkpoint / harness</code><p>Executable and enforceable experience. The lesson no longer sits in prose but in a check that fails without an agent involved.</p></div>
+          <div class="source-row memory-row"><code>AGENTS.md</code><p>Project instruction and index. What holds in this repository, and where the authoritative sources are.</p></div>
+          <div class="source-row memory-row"><code>Docs / code / config</code><p>Canonical facts. They belong to the project or to upstream and are referenced, not copied.</p></div>
+          <div class="source-row memory-row"><code>personal-rule</code><p>A user-specific durable instruction – a persistent directive, not a recollection of past sessions.</p></div>
+        </div>
+
+        <div class="grid-2">
+          <article class="card"><span class="card-code">consolidation</span><h3>Consolidating includes deleting.</h3><p>A system that can only add gets worse over time. That is why reconcile &amp; prune, outcome grading and audit are part of the loop: an experience that is superseded, refuted, or has arrived at its canonical owner is reduced to a reference or removed. That experience reused unfiltered carries errors forward, and that even correct-looking runs can be misleading as experience, is <a href="https://aclanthology.org/2026.acl-long.27/">empirically documented</a>.</p></article>
+          <article class="card orange"><span class="card-code">no memory store</span><h3>Not everything is called memory.</h3><p>There is no vector database, no similarity search over old sessions and no archive of complete past solutions kept “just in case”. Each form is named after what it does – instruction, check, fact – instead of putting everything under one shared storage metaphor.</p></article>
+        </div>
+
+        <div class="answer-box"><strong>Retrieval is part of the problem:</strong> a perfectly preserved experience that is not activated at the right moment is worthless. So the measurement happens twice – whether a loaded skill helps, and whether the agent works out for itself that it needs it. See <a href="#verification">verification</a>.</div>
       </div>
     </section>
 
@@ -1126,6 +1167,7 @@
         <div class="faq">
           <details><summary>What is the Netresearch Agent Engineering System?</summary><p>A closed learning and enforcement loop for coding agents. Real work produces friction and learnings; retro classifies them; skills, checkpoints, project rules, harness artifacts or upstream patches to the canonical source materialize them; assessment and CI verify the effect; the next session benefits from it.</p></details>
           <details><summary>How do new skills come about?</summary><p>Not from speculative topic lists, but retrospectively from real problems, recurring friction and reusable learnings. A new skill is only one possible destination; facts owned elsewhere go upstream to their canonical source, and rules that can be checked mechanically are preferably materialized as a checkpoint or as enforcement.</p></details>
+          <details><summary>Where is the memory in this system?</summary><p>In the form an experience takes after consolidation. The session transcript is raw experience and transient; retro consolidates it into reusable experience as a skill, executable or enforceable experience as a checkpoint or harness artifact, project instruction in <code>AGENTS.md</code>, canonical facts in docs, code and config, and a durable personal instruction as a <code>personal-rule</code>. There is deliberately no vector database and no similarity search over old sessions: consolidating includes deleting, because experience reused unfiltered carries errors forward.</p></details>
           <details><summary>What role does AGENTS.md play?</summary><p><code>AGENTS.md</code> is a compact index pointing to the authoritative project truth. Architecture, commands, dependencies and details stay in the actual sources such as <code>docs/</code>, <code>composer.json</code>, Makefile, DDEV configuration and scripts. The harness verifies that references and documented commands are correct.</p></details>
           <details><summary>What is the difference between a skill and a checkpoint?</summary><p>A skill carries workflow, decisions, failure patterns and non-mechanical guidance. A checkpoint encodes a verifiable invariant that can be evaluated against a project mechanically or as a defined LLM review.</p></details>
           <details><summary>How is it prevented that skills grow into large knowledge dumps?</summary><p>Skill content has to earn its context price. Preferred content is organization-specific knowledge, real failure patterns, volatile facts that models reliably get wrong, executable validators, inference suppression and anti-rationalization guards. Facts and triggers have a canonical owner – often outside the agent system; details are referenced on demand.</p></details>

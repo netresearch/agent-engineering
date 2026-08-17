@@ -87,6 +87,11 @@
           },
           {
             "@type": "Question",
+            "name": "Wo liegt in diesem System das Memory?",
+            "acceptedAnswer": {"@type": "Answer", "text": "In der Form, die eine Erfahrung nach der Konsolidierung bekommt. Das Session-Transkript ist Roh-Erfahrung und vergänglich; Retro konsolidiert daraus wiederverwendbare Erfahrung als Skill, ausführbare bzw. erzwingbare Erfahrung als Checkpoint oder Harness-Artefakt, Projekt-Instruktion in AGENTS.md, kanonische Fakten in Docs, Code und Config sowie eine dauerhafte persönliche Instruktion als personal-rule. Es gibt bewusst keine Vektordatenbank und keine Ähnlichkeitssuche über alte Sessions: Konsolidieren schließt Löschen ein, weil ungefiltert wiederverwendete Erfahrung Fehler weiterträgt."}
+          },
+          {
+            "@type": "Question",
             "name": "Welche Rolle spielt AGENTS.md?",
             "acceptedAnswer": {"@type": "Answer", "text": "AGENTS.md ist ein kompakter Index zur autoritativen Projektwahrheit. Architektur, Commands, Dependencies und Details bleiben in den tatsächlichen Quellen wie docs, composer.json, Makefile, DDEV-Konfiguration und Scripts. Der Harness prüft, dass Referenzen und dokumentierte Commands stimmen."}
           },
@@ -554,6 +559,7 @@
     }
     .source-row code { font-family: var(--nr-font-mono); color: var(--nr-primary); font-size: 13px; overflow-wrap: anywhere; }
     .source-row p { color: var(--nr-text-muted); }
+    .memory-forms { margin-top: 34px; }
 
     .rubric-list { margin-top: 36px; counter-reset: rubric; display: grid; gap: 12px; }
     .rubric-item {
@@ -871,6 +877,7 @@
 
       <nav class="nav-links" aria-label="Hauptnavigation">
         <a href="#system">System</a>
+        <a href="#memory">Memory</a>
         <a href="#retro">Retro</a>
         <a href="#project-context">Projektkontext</a>
         <a href="#quality">Qualität</a>
@@ -934,6 +941,40 @@
           <article class="map-card"><h3>Nächste Session</h3><p>Der nächste Agent startet bereits mit der konservierten Erfahrung.</p></article>
         </div>
         <div class="loop-return"><strong>Feedback Loop:</strong> Neue Arbeit erzeugt neue Evidenz – das System lernt weiter.</div>
+      </div>
+    </section>
+
+    <section class="section knowledge-section" id="memory" data-ai-source data-search-title="Memory und Konsolidierung" data-search-keywords="memory gedächtnis erfahrung experience consolidation konsolidierung episodisch prozedural transkript vektordatenbank retrieval pruning löschen personal rule">
+      <div class="container">
+        <span class="section-kicker">Memory</span>
+        <h2>Skills sind unsere konsolidierte Erfahrung.</h2>
+        <p class="section-intro">Ein Coding Agent hat über Sessions hinweg kein Gedächtnis. Die Frage ist deshalb nicht, wie eine Session gespeichert wird, sondern welche Form eine Erfahrung bekommen muss, damit die nächste Session sie schon mitbringt. Ein Skill speichert nicht die Session – er speichert die aus Sessions destillierte, wiederverwendbare Verhaltensänderung.</p>
+
+        <div class="code-block" aria-label="Von der Roh-Erfahrung zur konsolidierten Erfahrung">
+          <span class="teal">Roh-Erfahrung</span> · episodisch, an eine Session gebunden<br>
+          &nbsp;&nbsp;↓<br>
+          <span class="orange">Retro</span> = Konsolidierung<br>
+          &nbsp;&nbsp;↓<br>
+          Skill&nbsp;&nbsp;·&nbsp;&nbsp;Regel&nbsp;&nbsp;·&nbsp;&nbsp;Gate<br>
+          &nbsp;&nbsp;↓<br>
+          <span class="teal">konsolidiertes Erfahrungs- und Prozedurwissen</span>
+        </div>
+
+        <div class="source-list memory-forms" aria-label="Persistenzformen und was sie bedeuten">
+          <div class="source-row memory-row"><code>Session-Transkript</code><p>Roh-Erfahrung: vollständig, unsortiert und normalerweise vergänglich. Rohstoff, nicht Ergebnis.</p></div>
+          <div class="source-row memory-row"><code>Skill</code><p>Konsolidierte, wiederverwendbare Erfahrung. Workflow, Entscheidungen und Failure Patterns, destilliert aus realen Sessions.</p></div>
+          <div class="source-row memory-row"><code>Checkpoint / Harness</code><p>Ausführbare bzw. erzwingbare Erfahrung. Die Lektion steckt nicht mehr im Text, sondern in einem Check, der auch ohne Agenten fehlschlägt.</p></div>
+          <div class="source-row memory-row"><code>AGENTS.md</code><p>Projekt-Instruktion und Index. Was in diesem Repository gilt und wo die autoritativen Quellen liegen.</p></div>
+          <div class="source-row memory-row"><code>Docs / Code / Config</code><p>Kanonische Fakten. Sie gehören dem Projekt oder dem Upstream und werden referenziert, nicht kopiert.</p></div>
+          <div class="source-row memory-row"><code>personal-rule</code><p>Nutzerspezifische dauerhafte Instruktion – eine persistente Anweisung, kein Gedächtnis über vergangene Sessions.</p></div>
+        </div>
+
+        <div class="grid-2">
+          <article class="card"><span class="card-code">consolidation</span><h3>Konsolidieren heißt auch löschen.</h3><p>Ein System, das nur hinzufügen kann, wird schlechter. Deshalb gehören Reconcile &amp; Prune, Outcome-Bewertung und Audit zum Loop: eine Erfahrung, die überholt, widerlegt oder bei ihrem kanonischen Owner angekommen ist, wird zum Verweis reduziert oder entfernt. Dass ungefiltert wiederverwendete Erfahrung Fehler weiterträgt und selbst korrekt aussehende Läufe als Erfahrung irreführend sein können, ist <a href="https://aclanthology.org/2026.acl-long.27/">empirisch beschrieben</a>.</p></article>
+          <article class="card orange"><span class="card-code">no memory store</span><h3>Nicht alles heißt Memory.</h3><p>Es gibt keine Vektordatenbank, keine Ähnlichkeitssuche über alte Sessions und keine Ablage vollständiger Lösungswege „für alle Fälle“. Jede Form wird nach ihrer Wirkung benannt – Instruktion, Prüfung, Fakt – statt alles unter eine gemeinsame Speicher-Metapher zu stellen.</p></article>
+        </div>
+
+        <div class="answer-box"><strong>Abruf gehört zum Problem:</strong> Eine perfekt konservierte Erfahrung, die im richtigen Moment nicht aktiviert wird, ist wertlos. Deshalb wird zweimal gemessen – ob ein geladener Skill hilft, und ob der Agent von selbst erkennt, dass er ihn braucht. Siehe <a href="#verification">Prüfung</a>.</div>
       </div>
     </section>
 
@@ -1126,6 +1167,7 @@
         <div class="faq">
           <details><summary>Was ist das Netresearch Agent Engineering System?</summary><p>Ein geschlossener Lern- und Enforcement-Kreislauf für Coding Agents. Reale Arbeit erzeugt Reibung und Learnings; Retro klassifiziert sie; Skills, Checkpoints, Projektregeln, Harness-Artefakte oder Upstream-Patches an die kanonische Quelle materialisieren sie; Assessment und CI prüfen die Wirkung; die nächste Session profitiert davon.</p></details>
           <details><summary>Wie entstehen neue Skills?</summary><p>Nicht aus vermuteten Themenlisten, sondern retrospektiv aus realen Problemen, wiederkehrender Reibung und wiederverwendbaren Learnings. Ein neuer Skill ist nur eine mögliche Zielart; Fakten mit fremdem Owner gehen upstream an ihre kanonische Quelle, mechanisch prüfbare Regeln werden bevorzugt als Checkpoint oder Enforcement materialisiert.</p></details>
+          <details><summary>Wo liegt in diesem System das Memory?</summary><p>In der Form, die eine Erfahrung nach der Konsolidierung bekommt. Das Session-Transkript ist Roh-Erfahrung und vergänglich; Retro konsolidiert daraus wiederverwendbare Erfahrung als Skill, ausführbare bzw. erzwingbare Erfahrung als Checkpoint oder Harness-Artefakt, Projekt-Instruktion in <code>AGENTS.md</code>, kanonische Fakten in Docs, Code und Config sowie eine dauerhafte persönliche Instruktion als <code>personal-rule</code>. Es gibt bewusst keine Vektordatenbank und keine Ähnlichkeitssuche über alte Sessions: Konsolidieren schließt Löschen ein, weil ungefiltert wiederverwendete Erfahrung Fehler weiterträgt.</p></details>
           <details><summary>Welche Rolle spielt AGENTS.md?</summary><p><code>AGENTS.md</code> ist ein kompakter Index zur autoritativen Projektwahrheit. Architektur, Commands, Dependencies und Details bleiben in den tatsächlichen Quellen wie <code>docs/</code>, <code>composer.json</code>, Makefile, DDEV-Konfiguration und Scripts. Der Harness prüft, dass Referenzen und dokumentierte Commands stimmen.</p></details>
           <details><summary>Was ist der Unterschied zwischen einem Skill und einem Checkpoint?</summary><p>Ein Skill trägt Workflow, Entscheidungen, Failure Patterns und nicht-mechanische Anleitung. Ein Checkpoint kodiert eine prüfbare Invariante, die mechanisch oder als definierter LLM-Review gegen ein Projekt bewertet werden kann.</p></details>
           <details><summary>Wie wird verhindert, dass Skills zu großen Wissenssammlungen werden?</summary><p>Skill-Inhalt muss seinen Kontextpreis verdienen. Bevorzugt werden organisationsspezifisches Wissen, reale Failure Patterns, volatile Fakten, die Modelle zuverlässig falsch haben, ausführbare Validatoren, Inference-Suppression und Anti-Rationalization-Guards. Fakten und Trigger haben einen kanonischen Owner – oft außerhalb des Agent-Systems; Details werden on demand referenziert.</p></details>

@@ -34,6 +34,19 @@ The Netresearch Agent Engineering System is a closed learning and enforcement lo
 - Checkpoints turn durable requirements into mechanically or semantically verifiable specifications.
 - The harness verifies artifacts and integration outcomes, not which tool created them.
 
+## Memory and consolidation
+
+Skills are this system's consolidated experience memory: they do not store the session, they store the reusable change in behavior distilled from sessions. Retro is the consolidation step between raw experience and durable form. Each form is named after what it does, so "memory" is not applied to all of them:
+
+- session transcript: raw, episodic experience, normally transient
+- skill: consolidated, reusable experience
+- checkpoint / harness artifact: executable and enforceable experience
+- AGENTS.md: project instruction and index
+- docs / code / config: canonical facts, referenced rather than copied
+- personal-rule: a user-specific durable instruction, not a recollection of past sessions
+
+Consolidating includes deleting: reconcile & prune, outcome grading and audit remove or shrink experience that is superseded, refuted, or has arrived at its canonical owner. A system that can only add gets worse over time, and experience reused unfiltered carries errors forward (Xiong et al., ACL 2026, https://aclanthology.org/2026.acl-long.27/). There is deliberately no vector store, no similarity search over past sessions, and no archive of complete past solutions. Retrieval is part of the problem: a preserved experience that is not activated at the right moment has no value, which is why effect is measured twice — per-skill A/B evals ask whether a loaded skill helps, and system evals ask whether the agent works out for itself that it needs the skill.
+
 ## The seven retro destinations
 
 - user-memory: personal cross-project preference
@@ -56,6 +69,7 @@ The Netresearch Agent Engineering System is a closed learning and enforcement lo
 ## Page sections
 
 - #system — the complete lifecycle
+- #memory — what memory means here, and which form each experience takes
 - #retro — friction and learning routing
 - #project-context — AGENTS.md and project source-of-truth model
 - #quality — skill content rubric, canonical ownership, A/B evidence
