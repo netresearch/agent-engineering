@@ -6,7 +6,7 @@ Canonical page: https://netresearch.github.io/agent-engineering/
 English version: https://netresearch.github.io/agent-engineering/en/
 Organization: Netresearch DTT GmbH
 Primary language: German
-Last reviewed: 2026-08-13
+Last reviewed: 2026-08-17
 
 ## Core answer
 
@@ -14,7 +14,7 @@ The Netresearch Agent Engineering System is a closed learning and enforcement lo
 
 1. Real work exposes friction and reusable learnings.
 2. retro-skill classifies each learning by authority (who owns this truth?), enforceability, and reach.
-3. The learning becomes the strongest appropriate durable artifact: user memory, project rule, skill update, new skill, checkpoint, harness artifact, or a patch to the canonical source that owns the fact.
+3. The learning becomes the strongest appropriate durable artifact: personal rule, project rule, skill update, new skill, checkpoint, harness artifact, or a patch to the canonical source that owns the fact.
 4. skill-repo-skill standardizes skill structure, quality, canonical ownership, references, validation, and release discipline.
 5. automated-assessment-skill evaluates checkpoint-enabled skills against real repositories and produces structured gap reports.
 6. agent-harness-skill makes repository agent-readiness self-sustaining through AGENTS.md, docs, CI, hooks, templates, and enforcement.
@@ -51,7 +51,7 @@ Consolidating includes deleting: reconcile & prune, outcome grading and audit re
 
 ## The seven retro destinations
 
-- user-memory: personal cross-project preference
+- personal-rule: personal cross-project preference, materialized as a durable instruction (formerly named user-memory; that name is a deprecated alias)
 - project-rule: repository-specific convention or command
 - skill-update: reusable gap in an existing skill
 - new-skill: missing reusable capability category
